@@ -5,13 +5,13 @@ data "archive_file" "lambda_zip" {
   output_path = "lambda.zip"
 }
 
-resource "aws_lambda_permission" "apigateway_invoke" {
-  statement_id  = "AllowAPIGatewayInvoke"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.tasks_api.function_name
-  principal     = "apigateway.amazonaws.com"
-  source_arn    = "arn:aws:execute-api:us-east-1:${var.account_id}:${aws_api_gateway_rest_api.tasks_api.id}/*/*"
-}
+# resource "aws_lambda_permission" "apigateway_invoke" {
+#   statement_id  = "AllowAPIGatewayInvoke"
+#   action        = "lambda:InvokeFunction"
+#   function_name = aws_lambda_function.tasks_api.function_name
+#   principal     = "apigateway.amazonaws.com"
+#   source_arn    = "arn:aws:execute-api:us-east-1:${var.account_id}:${aws_api_gateway_rest_api.tasks_api.id}/*/*"
+# }
 # Lambda Function
 resource "aws_lambda_function" "tasks_api" {
   function_name = "tasks-api"
