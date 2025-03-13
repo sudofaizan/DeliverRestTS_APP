@@ -1,0 +1,16 @@
+mkdir serverless-api && cd serverless-api
+npm init -y
+npm install express pg dotenv cors
+
+
+docker run --name postgres-container -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword -e POSTGRES_DB=mydatabase -p 5432:5432 -d postgres
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+node server.js
+
+curl -X POST http://localhost:3000/tasks -H "Content-Type: application/json" -d '{"description": "Buy groceries"}'
