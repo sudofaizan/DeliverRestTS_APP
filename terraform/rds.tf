@@ -9,7 +9,6 @@ resource "aws_db_instance" "postgres" {
   instance_class         = "db.t3.micro"
   allocated_storage      = 20
   db_name                = "mydatabase"
-  username               = "admin"
   password               = "##Linux##1"
   publicly_accessible    = true
   skip_final_snapshot    = true
