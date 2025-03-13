@@ -14,3 +14,33 @@ CREATE TABLE tasks (
 node server.js
 
 curl -X POST http://localhost:3000/tasks -H "Content-Type: application/json" -d '{"description": "Buy groceries"}'
+curl -X POST https://8u4grcx4u8.execute-api.us-east-1.amazonaws.com/prod/tasks -H "Content-Type: application/json" -d '{"description": "Buy groceries"}'
+curl -X GET https://8u4grcx4u8.execute-api.us-east-1.amazonaws.com/prod/tasks
+
+aws lambda add-permission \
+  --function-name tasks-api \
+  --statement-id apigateway-invoke \
+  --action lambda:InvokeFunction \
+  --principal apigateway.amazonaws.com \
+  --source-arn "arn:aws:execute-api:us-east-1:796973476611:8u4grcx4u8/*/*/*"
+
+
+{
+  "resource": "/tasks",
+  "httpMethod": "POST",
+  "body": "{\"description\": \"Buy groceries\"}"
+
+}
+
+
+POST THAT WORKED
+ curl -X POST https://8u4grcx4u8.execute-api.us-east-1.amazonaws.com/prod/tasks  -H "Content-Type: application/json" -d '{
+  "resource": "/tasks",
+  "httpMethod": "POST",
+  "body": "{\"description\": \"Buy gro\"}"
+}'
+
+
+GET THAT WORKED
+
+curl -X GET https://8u4grcx4u8.execute-api.us-east-1.amazonaws.com/prod/tasks   
