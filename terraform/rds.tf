@@ -30,7 +30,7 @@ resource "aws_security_group" "allow_rds" {
 resource "null_resource" "initialize_db" {
   provisioner "local-exec" {
     command = <<EOT
-      PGPASSWORD=##Linux##1 psql -h ${aws_db_instance.postgres.address} -U admin -d mydatabase -c "
+      PGPASSWORD=##Linux##1 psql -h ${aws_db_instance.postgres.address} -U myuser -d mydatabase -c "
       CREATE TABLE IF NOT EXISTS tasks (
         id SERIAL PRIMARY KEY,
         description TEXT NOT NULL,
